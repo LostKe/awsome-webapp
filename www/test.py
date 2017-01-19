@@ -1,14 +1,6 @@
 # coding=utf-8
+import uuid, time
 
-l = ','.join(map(lambda z: '`%s`=?' % z, ('a', 'b', 'c')))
-print(l)
+default = time.time
 
-
-class Person(object):
-    def sayHello(self):
-        print("hello ....")
-
-
-p = Person()
-
-print(callable(p.sayHello))
+print(default())

@@ -110,6 +110,16 @@ class BooleanFiled(Filed):
         super().__init__(self, name, 'boolean', False, default)
 
 
+class FloatFiled(Filed):
+    def __init__(self, name=None, primary_key=False, default=None):
+        super().__init__(self, name, 'real', primary_key, default)
+
+
+class TextFiled(Filed):
+    def __init__(self, name=None, default=None):
+        super().__init__(self, 'text', False, default)
+
+
 """
 # -*-ModelMetaclass的工作主要是为一个数据库表映射成一个封装的类做准备：
 # ***读取具体子类 的映射信息
@@ -203,7 +213,7 @@ class Model(dict, metaclass=ModelMetaclass):
         if value is None:
             field = self.__mappings__[key]
             if field.default is not None:
-                # callable 检查对象是否可以调用
+                # callable 检查对象是否可以调用， 检查default是字段还是对象
                 value = field.default() if callable(field.default) else field.default
                 logging.debug('useing default vale for %s:%s' % (key, value))
                 setattr(self, key, value)
